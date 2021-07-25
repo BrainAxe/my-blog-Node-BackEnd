@@ -2,10 +2,10 @@
   "name": "my-blog",
   "version": "1.0.0",
   "description": "A simple blog with REST API ",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
