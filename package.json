@@ -2,6 +2,9 @@
   "name": "my-blog",
   "version": "1.0.0",
   "description": "A simple blog with REST API ",
+  "engines" : {
+    "node" : ">=8.3.0 <15.0.0"
+  },
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
