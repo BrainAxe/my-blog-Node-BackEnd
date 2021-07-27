@@ -10,7 +10,9 @@ async function createUser(input) {
   }
 }
 
-function findUser() {}
+function findUser(query) {
+  return User.findOne(query).lean();
+}
 
 async function validatePassword(email, password) {
   const user = await User.findOne({ email });
