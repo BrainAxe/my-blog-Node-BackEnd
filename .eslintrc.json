@@ -1,8 +1,9 @@
 {
-  "extends": ["airbnb", "prettier", "plugin:node/recommended"],
+  "extends": ["airbnb-base", "prettier", "plugin:node/recommended"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error","no-unused-vars":"warn",
+    "prettier/prettier": "error",
+    "no-unused-vars":"warn",
     "no-console":"warn",
     "func-names":"off",
     "no-process-exit":"off",
