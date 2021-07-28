@@ -7,6 +7,7 @@ const {
 const {
   createPostHandler,
   getPostHandler,
+  getAllPostHandler,
   updatePostHandler,
   deletePostHandler
 } = require('./controller/post.controller');
@@ -50,6 +51,9 @@ module.exports = function (app) {
 
   // Read a Post
   app.get('/api/posts/:postId', getPostHandler);
+
+  // Read all Post
+  app.get('/api/posts', getAllPostHandler);
 
   // Update a Post
   app.put('/api/posts/:postId', [

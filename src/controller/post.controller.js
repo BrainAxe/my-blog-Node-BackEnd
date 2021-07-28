@@ -2,6 +2,7 @@ const { get } = require('lodash');
 const {
   createPost,
   findPost,
+  findAllPost,
   findAndUpdate,
   deletePost
 } = require('../service/post.service');
@@ -22,6 +23,14 @@ async function getPostHandler(req, res) {
     return res.sendStatus(404);
   }
   return res.send(post);
+}
+
+async function getAllPostHandler(req, res) {
+  const posts = await findAllPost();
+  if (!posts) {
+    return res.sendStatus(404);
+  }
+  return res.send(posts);
 }
 
 async function updatePostHandler(req, res) {
@@ -66,6 +75,7 @@ async function deletePostHandler(req, res) {
 module.exports = {
   createPostHandler,
   getPostHandler,
+  getAllPostHandler,
   updatePostHandler,
   deletePostHandler
 };
