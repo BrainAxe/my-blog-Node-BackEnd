@@ -12,4 +12,8 @@ function findAndUpdate(query, update, options) {
   return Post.findOneAndUpdate(query, update, options);
 }
 
-module.exports = { createPost, findPost, findAndUpdate };
+function deletePost(query) {
+  return Post.deleteOne(query);
+}
+
+module.exports = { createPost, findPost, findAndUpdate, deletePost };

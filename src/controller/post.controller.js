@@ -2,7 +2,8 @@ const { get } = require('lodash');
 const {
   createPost,
   findPost,
-  findAndUpdate
+  findAndUpdate,
+  deletePost
 } = require('../service/post.service');
 
 async function createPostHandler(req, res) {
@@ -43,4 +44,28 @@ async function updatePostHandler(req, res) {
   return res.send(updatedPost);
 }
 
-module.exports = { createPostHandler, getPostHandler, updatePostHandler };
+async function deletePostHandler(req, res) {
+  const userId = get(req, 'user._id');
+  const postId = get(req, 'params.postId');
+
+  const post = await findPost({ postId });
+
+  if (!post) {
+    return res.sendStatus(404);
+  }
+
+  if (String(post.user) !== userId) {
+    return res.sendStatus(401);
+  }
+
+  await deletePost({ postId });
+
+  return res.sendStatus(200);
+}
+
+module.exports = {
+  createPostHandler,
+  getPostHandler,
+  updatePostHandler,
+  deletePostHandler
+};
