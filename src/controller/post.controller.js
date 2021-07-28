@@ -1,5 +1,9 @@
 const { get } = require('lodash');
-const { createPost, findPost } = require('../service/post.service');
+const {
+  createPost,
+  findPost,
+  findAndUpdate
+} = require('../service/post.service');
 
 async function createPostHandler(req, res) {
   const userId = get(req, 'user._id');
@@ -19,4 +23,24 @@ async function getPostHandler(req, res) {
   return res.send(post);
 }
 
-module.exports = { createPostHandler, getPostHandler };
+async function updatePostHandler(req, res) {
+  const userId = get(req, 'user._id');
+  const postId = get(req, 'params.postId');
+  const update = req.body;
+
+  const post = await findPost({ postId });
+
+  if (!post) {
+    return res.sendStatus(404);
+  }
+
+  if (String(post.user) !== userId) {
+    return res.sendStatus(401);
+  }
+
+  const updatedPost = await findAndUpdate({ postId }, update, { new: true });
+
+  return res.send(updatedPost);
+}
+
+module.exports = { createPostHandler, getPostHandler, updatePostHandler };

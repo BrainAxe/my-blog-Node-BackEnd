@@ -6,7 +6,8 @@ const {
 } = require('./controller/session.controller');
 const {
   createPostHandler,
-  getPostHandler
+  getPostHandler,
+  updatePostHandler
 } = require('./controller/post.controller');
 const validateRequest = require('./middleware/validateRequest');
 const requiresUser = require('./middleware/requiresUser');
@@ -14,7 +15,7 @@ const {
   createUserSchema,
   createUserSessionSchema
 } = require('./schema/user.schema');
-const { createPostSchema } = require('./schema/post.schema');
+const { createPostSchema, updatePostSchema } = require('./schema/post.schema');
 
 module.exports = function (app) {
   app.get('/healthcheck', (req, res) => res.sendStatus(200));
@@ -44,4 +45,11 @@ module.exports = function (app) {
 
   // Read a Post
   app.get('/api/posts/:postId', getPostHandler);
+
+  // Update a Post
+  app.put('/api/posts/:postId', [
+    requiresUser,
+    validateRequest(updatePostSchema),
+    updatePostHandler
+  ]);
 };

@@ -8,4 +8,8 @@ function findPost(query, options) {
   return Post.findOne(query, {}, options);
 }
 
-module.exports = { createPost, findPost };
+function findAndUpdate(query, update, options) {
+  return Post.findOneAndUpdate(query, update, options);
+}
+
+module.exports = { createPost, findPost, findAndUpdate };
