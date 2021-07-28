@@ -4,4 +4,8 @@ function createPost(input) {
   return Post.create(input);
 }
 
-module.exports = { createPost };
+function findPost(query, options) {
+  return Post.findOne(query, {}, options);
+}
+
+module.exports = { createPost, findPost };

@@ -4,7 +4,10 @@ const {
   invalidateUserSessionHandler,
   getUserSessionsHandler
 } = require('./controller/session.controller');
-const { createPostHandler } = require('./controller/post.controller');
+const {
+  createPostHandler,
+  getPostHandler
+} = require('./controller/post.controller');
 const validateRequest = require('./middleware/validateRequest');
 const requiresUser = require('./middleware/requiresUser');
 const {
@@ -38,4 +41,7 @@ module.exports = function (app) {
     [requiresUser, validateRequest(createPostSchema)],
     createPostHandler
   );
+
+  // Read a Post
+  app.get('/api/posts/:postId', getPostHandler);
 };
