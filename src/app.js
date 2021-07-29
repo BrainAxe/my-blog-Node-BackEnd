@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const express = require('express');
-const config = require('config');
+require('dotenv').config();
 const helmet = require('helmet');
 const morgan = require('morgan');
 const log = require('./logger');
@@ -9,8 +9,8 @@ const connect = require('./db/connect');
 const routes = require('./routes');
 const deserializeUser = require('./middleware/deserializeUser');
 
-const port = config.get('port');
-const host = config.get('host');
+const port = process.env.PORT;
+const host = process.env.HOST;
 
 const app = express();
 app.use(deserializeUser);

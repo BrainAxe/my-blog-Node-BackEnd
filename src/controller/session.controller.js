@@ -1,5 +1,5 @@
 const { get } = require('lodash');
-const config = require('config');
+require('dotenv').config();
 const { validatePassword } = require('../service/user.service');
 const {
   createSession,
@@ -26,7 +26,7 @@ async function createUserSessionHandler(req, res) {
 
   // Create refresh token
   const refreshToken = sign(session, {
-    expiresIn: config.get('refreshTokenTtl')
+    expiresIn: process.env.REFRESH_TOKEN_TTL
   });
 
   // send refresh & access token back

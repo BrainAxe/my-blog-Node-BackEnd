@@ -1,4 +1,4 @@
-const config = require('config');
+require('dotenv').config();
 const { get } = require('lodash');
 const Session = require('../model/session.model');
 const { sign, decode } = require('../utils/jwt.utils');
@@ -14,7 +14,7 @@ function createAccessToken(user, session) {
   const accessToken = sign(
     { ...user, session: session._id },
     {
-      expiresIn: config.get('accessTokenTtl')
+      expiresIn: process.env.ACCESS_TOKEN_TTL
     }
   );
 

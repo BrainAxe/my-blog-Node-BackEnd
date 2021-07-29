@@ -1,6 +1,5 @@
-const User = require('../model/user.model');
 const { omit } = require('lodash');
-
+const User = require('../model/user.model');
 
 async function createUser(input) {
   try {
@@ -27,7 +26,7 @@ async function validatePassword(email, password) {
     return false;
   }
 
-  return omit(user.toJSON(), "password");
+  return omit(user.toJSON(), 'password');
 }
 
 module.exports = { createUser, findUser, validatePassword };

@@ -4,9 +4,9 @@ const dayjs = require('dayjs');
 const log = logger({
   prettyPrint: true,
   base: {
-    pid: false,
+    pid: false
   },
-  timestamp: () => `, "time":"${dayjs().format()}"`,
+  timestamp: () => `, "time":"${dayjs().format()}"`
 });
 
 module.exports = log;

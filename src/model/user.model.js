@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const config = require('config');
+require('dotenv').config();
 
 const UserSchema = new mongoose.Schema(
   {
@@ -22,13 +22,13 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.pre('save', async function (next) {
-  let user = this;
+  const user = this;
 
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) return next();
 
   // Random additional data
-  const salt = await bcrypt.genSalt(config.get('saltWorkFactor'));
+  const salt = await bcrypt.genSalt(process.env.SALT_WORK_FACTOR);
 
   const hash = await bcrypt.hashSync(user.password, salt);
 

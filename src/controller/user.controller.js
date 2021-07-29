@@ -1,5 +1,5 @@
-const { createUser } = require('../service/user.service');
 const { omit } = require('lodash');
+const { createUser } = require('../service/user.service');
 const log = require('../logger');
 
 async function createUserHandler(req, res) {
@@ -10,6 +10,6 @@ async function createUserHandler(req, res) {
     log.error(e);
     return res.status(409).send(e.message);
   }
-};
+}
 
 module.exports = { createUserHandler };
