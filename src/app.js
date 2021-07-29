@@ -10,7 +10,7 @@ const routes = require('./routes');
 const deserializeUser = require('./middleware/deserializeUser');
 
 const port = process.env.PORT;
-const host = process.env.HOST;
+// const host = process.env.HOST;
 
 const app = express();
 app.use(deserializeUser);
