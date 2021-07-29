@@ -26,8 +26,13 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.listen(port, host, () => {
-  log.info(`Server is listening on http://${host}:${port}`);
+// app.listen(port, host, () => {
+//   log.info(`Server is listening on http://${host}:${port}`);
+//   connect();
+//   routes(app);
+// });
+app.listen(port, () => {
+  log.info(`Server is listening on port ${port}`);
   connect();
   routes(app);
 });
