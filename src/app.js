@@ -1,5 +1,9 @@
+const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const config = require('config');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const log = require('./logger');
 const connect = require('./db/connect');
 const routes = require('./routes');
@@ -10,6 +14,14 @@ const host = config.get('host');
 
 const app = express();
 app.use(deserializeUser);
+
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, 'access.log'),
+  { flags: 'a' }
+);
+
+app.use(helmet());
+app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
